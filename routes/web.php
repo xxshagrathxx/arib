@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -72,6 +73,17 @@ Route::group(
         });
 
         // Pages
+
+            // Translates
+            Route::prefix('/departments')->middleware('permission:show_departments')->group(function() {
+                Route::get('/all', [DepartmentController::class, 'index'])->middleware('permission:show_departments')->name('departments.all');
+                Route::get('/create', [DepartmentController::class, 'create'])->middleware('permission:create_departments')->name('departments.create');
+                Route::post('/store', [DepartmentController::class, 'store'])->middleware('permission:create_departments')->name('departments-store');
+                Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->middleware('permission:update_departments')->name('departments-edit');
+                Route::post('/update/{id}', [DepartmentController::class, 'update'])->middleware('permission:update_departments')->name('departments-update');
+                Route::get('/delete/{id}', [DepartmentController::class, 'destroy'])->middleware('permission:delete_departments')->name('departments-delete');
+            });
+            // ./Translates
 
             // Translates
             Route::prefix('/translates')->middleware('arabicOnly', 'permission:show_translates')->group(function() {

@@ -37,6 +37,18 @@ class PermissionSeeder extends Seeder
         Permission::create(['name'=>'assign_permissions']);
         Permission::create(['name'=>'update_permissions']);
 
+        // Departments
+        Permission::create(['name'=>'show_departments']);
+        Permission::create(['name'=>'create_departments']);
+        Permission::create(['name'=>'update_departments']);
+        Permission::create(['name'=>'delete_departments']);
+
+        // Employees
+        Permission::create(['name'=>'show_employees']);
+        Permission::create(['name'=>'create_employees']);
+        Permission::create(['name'=>'update_employees']);
+        Permission::create(['name'=>'delete_employees']);
+
         // Settings
         Permission::create(['name'=>'update_settings']);
     }

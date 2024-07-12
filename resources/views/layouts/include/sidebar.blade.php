@@ -47,6 +47,17 @@
         @endif
       {{-- ./Translation --}}
 
+      {{-- Departments --}}
+        @can('update_departments')
+            <li class="nav-item">
+                <a class="{{ menuNoChildren('departments', true) }}" href="{{ route('departments.all') }}">
+                        <i class="bi bi-collection-fill"></i>
+                        <span>{{ transWord('Departments') }}</span>
+                </a>
+            </li>
+        @endcan
+      {{-- ./Departments --}}
+
       {{-- Settings --}}
         @can('update_settings')
             <li class="nav-item">
