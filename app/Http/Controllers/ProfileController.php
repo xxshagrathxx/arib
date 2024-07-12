@@ -16,14 +16,18 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+        $user = auth()->user();
+
         $request->validate([
             'name' => 'required',
             'password' => 'nullable|confirmed|min:8',
+            'phone' => 'required|unique:users,phone,'.$user->id,
             'image' => 'mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ],[
             'name.required' => transWord('This field is required'),
             'password.confirmed' => transWord('Passwords don\'t match'),
             'password.min' => transWord('Password must be 8 characters or more'),
+            'phone.required' => transWord('This field is required'),
             'image.mimes' => 'The image must be of type (jpeg,png,jpg,webp,gif,svg)',
             'image.max' => 'The image size cannot be larger than 2MB',
         ]);
@@ -40,8 +44,6 @@ class ProfileController extends Controller
             Image::make($image)->resize(300, 300)->save('uploads/users/'.$name_gen);
             $save_url = $name_gen;
         }
-
-        $user = auth()->user();
 
         if($request->password) {
             if($user->id == 2 && $user->password_changed == 0) {

@@ -60,6 +60,16 @@
 
                         <div class="col-8 mb-3">
                             <div class="form-group">
+                                <label for="phone">{{ transWord('Phone') }}</label>
+                                <input type="text" class="form-control" name="phone" placeholder="{{ transWord('Enter Phone') }}" value="{{ old('phone', $user->phone) }}" />
+                                @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-8 mb-3">
+                            <div class="form-group">
                                 <label for="role_id">{{ transWord('Role') }}<span class="is-required">(*)</span></label>
                                 <select name="role_id" id="role_id" class="form-select">
                                     <option value="" selected="" disabled="">{{ transWord('Select Role') }}</option>

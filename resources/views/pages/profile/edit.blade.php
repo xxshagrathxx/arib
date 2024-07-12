@@ -51,6 +51,16 @@
 
                         <div class="col-8 mb-3">
                             <div class="form-group">
+                                <label for="phone">{{ transWord('Phone') }}</label>
+                                <input type="text" class="form-control" name="phone" placeholder="{{ transWord('Enter Phone') }}" value="{{ old('phone', $user->phone) }}" />
+                                @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-8 mb-3">
+                            <div class="form-group">
                                 <label for="image">{{ transWord('Upload avatar here') }}</label>
                                 <input class="form-control" type="file" name="image" id="image">
                             </div>

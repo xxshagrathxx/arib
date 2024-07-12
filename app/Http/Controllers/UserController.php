@@ -88,6 +88,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
+            'phone' => 'required|unique:users,phone',
             'role_id' => 'required',
             'image' => 'mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ],[
@@ -116,6 +117,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone' => $request->phone,
             'role_id' => $request->role_id,
             'avatar' => $save_url,
         ]);
@@ -169,6 +171,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|confirmed|min:8',
+            'phone' => 'required|unique:users,phone,'.$id,
             'role_id' => 'required',
             'image' => 'mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ],[
@@ -203,6 +206,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'phone' => $request->phone,
                 'role_id' => $request->role_id,
                 'avatar' => $save_url,
             ]);
@@ -210,6 +214,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'role_id' => $request->role_id,
                 'avatar' => $save_url,
             ]);
