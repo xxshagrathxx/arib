@@ -1,0 +1,8 @@
+@font-face {
+    font-family: arabicFont;
+    src: url(../fonts/Almarai-Bold.ttf);
+}
+
+body {
+    font-family: arabicFont !important
+}
