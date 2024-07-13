@@ -69,6 +69,19 @@
         @endcan
       {{-- ./Employees --}}
 
+      {{-- Tasks --}}
+        @if (auth()->user()->id != 1)
+          @can('show_tasks')
+              <li class="nav-item">
+                  <a class="{{ menuNoChildren('tasks', true) }}" href="{{ route('tasks.all') }}">
+                          <i class="bi bi-list-task"></i>
+                          <span>{{ transWord('Tasks') }}</span>
+                  </a>
+              </li>
+          @endcan
+        @endif
+      {{-- ./Tasks --}}
+
       {{-- Settings --}}
         @can('update_settings')
             <li class="nav-item">

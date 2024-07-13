@@ -9,6 +9,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TranslateController;
 use App\Http\Controllers\UserController;
 
@@ -83,6 +84,7 @@ Route::group(
                 Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->middleware('permission:update_departments')->name('departments-edit');
                 Route::post('/update/{id}', [DepartmentController::class, 'update'])->middleware('permission:update_departments')->name('departments-update');
                 Route::get('/delete/{id}', [DepartmentController::class, 'destroy'])->middleware('permission:delete_departments')->name('departments-delete');
+                Route::get('/search', [DepartmentController::class, 'search'])->middleware('permission:show_departments')->name('departments-search');
             });
             // ./Departments
 
@@ -96,6 +98,17 @@ Route::group(
                 Route::get('/delete/{id}', [EmployeeController::class, 'destroy'])->middleware('permission:delete_employees')->name('employees-delete');
             });
             // ./Employees
+
+            // Tasks
+            Route::prefix('/tasks')->middleware('permission:show_tasks')->group(function() {
+                Route::get('/all', [TaskController::class, 'index'])->middleware('permission:show_tasks')->name('tasks.all');
+                Route::get('/create', [TaskController::class, 'create'])->middleware('permission:create_tasks')->name('tasks.create');
+                Route::post('/store', [TaskController::class, 'store'])->middleware('permission:create_tasks')->name('tasks-store');
+                Route::get('/edit/{id}', [TaskController::class, 'edit'])->middleware('permission:update_tasks')->name('tasks-edit');
+                Route::post('/update/{id}', [TaskController::class, 'update'])->middleware('permission:update_tasks')->name('tasks-update');
+                Route::get('/delete/{id}', [TaskController::class, 'destroy'])->middleware('permission:delete_tasks')->name('tasks-delete');
+            });
+            // ./Tasks
 
             // Translates
             Route::prefix('/translates')->middleware('arabicOnly', 'permission:show_translates')->group(function() {

@@ -1,23 +1,24 @@
 @extends('layouts.master')
 
 @section('page_title')
-    {{ transWord('Departments') }}
+    {{ transWord('Tasks') }}
 @endsection
 @section('title')
-    {{ transWord('Departments') }}
+    {{ transWord('Tasks') }}
 @endsection
 
 @section('content')
     <div class="card info-card pt-3 ps-3">
         <div class="card-body">
             <div class="row">
-                @can('create_departments')
-                    <div class="col-12">
-                        <div class="text-end">
-                            <a href="{{ route('departments-search') }}" class="btn btn-info"><i class="bi bi-search"></i> {{ transWord('Search') }}</a>
-                            <a href="{{ route('departments.create') }}" class="btn btn-success">{{ transWord('Create New') }}</a>
+                @can('create_tasks')
+                    @if (auth()->user()->employee->parent_id == null)
+                        <div class="col-12">
+                            <div class="text-end">
+                                <a href="{{ route('tasks.create') }}" class="btn btn-success">{{ transWord('Create New') }}</a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endcan
             </div>
             <hr>
@@ -27,6 +28,7 @@
                         <tr>
                             <th style="width: 1%;">#</th>
                             <th>{{ transWord('Name') }}</th>
+                            <th>{{ transWord('Status') }}</th>
                             <th class="text-end">{{ transWord('Actions') }}</th>
                         </tr>
                     </thead>
@@ -57,10 +59,11 @@
                         "previous": '<i class="fas fa-angle-left"></i>'
                     },
                 },
-                ajax: "{{ route('departments.all') }}",
+                ajax: "{{ route('tasks.all') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'status', name: 'status'},
                     {
                         data: 'action',
                         name: 'action',

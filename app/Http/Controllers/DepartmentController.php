@@ -6,6 +6,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class DepartmentController extends Controller
 {
@@ -149,5 +150,16 @@ class DepartmentController extends Controller
 		);
 
         return redirect()->route('departments.all')->with($notification);
+    }
+
+    public function search()
+    {
+        $results = DB::table('departments as d')
+                    ->leftJoin('employees as e', 'd.id', '=', 'e.department_id')
+                    ->select('d.name as department_name', DB::raw('COUNT(e.id) as employee_count'), DB::raw('SUM(e.salary) as total_salaries'))
+                    ->groupBy('d.name')
+                    ->get();
+
+        return view('pages.departments.search', compact('results'));
     }
 }

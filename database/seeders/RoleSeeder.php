@@ -21,7 +21,18 @@ class RoleSeeder extends Seeder
             $role->givePermissionTo($permission->name);
         }
 
-        Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Public']);
+        $employeeRole = Role::create(['name' => 'Employee']);
+
+        $permissions = [
+            'show_tasks',
+            'create_tasks',
+            'update_tasks',
+            'delete_tasks',
+        ];
+
+        foreach ($permissions as $permissionName) {
+            $permission = Permission::findOrCreate($permissionName);
+            $employeeRole->givePermissionTo($permission);
+        }
     }
 }

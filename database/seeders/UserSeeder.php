@@ -28,18 +28,5 @@ class UserSeeder extends Seeder
         ]);
 
         $user->assignRole('Super Admin');
-
-        $user = User::create([
-            'name' => 'Admin',
-            'password' => \Hash::make('admin'),
-            'email' => 'admin@binbug.net',
-            'phone' => '01234567891',
-            'email_verified_at' => now(),
-            'role_id' => 1, // As this is the super admin
-            'avatar' => 'default.png',
-            'remember_token' => Str::random(10),
-        ]);
-
-        $user->assignRole('Admin');
     }
 }
