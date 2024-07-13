@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -74,7 +75,7 @@ Route::group(
 
         // Pages
 
-            // Translates
+            // Departments
             Route::prefix('/departments')->middleware('permission:show_departments')->group(function() {
                 Route::get('/all', [DepartmentController::class, 'index'])->middleware('permission:show_departments')->name('departments.all');
                 Route::get('/create', [DepartmentController::class, 'create'])->middleware('permission:create_departments')->name('departments.create');
@@ -83,7 +84,18 @@ Route::group(
                 Route::post('/update/{id}', [DepartmentController::class, 'update'])->middleware('permission:update_departments')->name('departments-update');
                 Route::get('/delete/{id}', [DepartmentController::class, 'destroy'])->middleware('permission:delete_departments')->name('departments-delete');
             });
-            // ./Translates
+            // ./Departments
+
+            // Employees
+            Route::prefix('/employees')->middleware('permission:show_employees')->group(function() {
+                Route::get('/all', [EmployeeController::class, 'index'])->middleware('permission:show_employees')->name('employees.all');
+                Route::get('/create', [EmployeeController::class, 'create'])->middleware('permission:create_employees')->name('employees.create');
+                Route::post('/store', [EmployeeController::class, 'store'])->middleware('permission:create_employees')->name('employees-store');
+                Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->middleware('permission:update_employees')->name('employees-edit');
+                Route::post('/update/{id}', [EmployeeController::class, 'update'])->middleware('permission:update_employees')->name('employees-update');
+                Route::get('/delete/{id}', [EmployeeController::class, 'destroy'])->middleware('permission:delete_employees')->name('employees-delete');
+            });
+            // ./Employees
 
             // Translates
             Route::prefix('/translates')->middleware('arabicOnly', 'permission:show_translates')->group(function() {

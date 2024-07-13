@@ -31,7 +31,7 @@ class DepartmentController extends Controller
                                     </a>';
                         }
                         if(auth()->user()->can('delete_departments')) {
-                            $btn .= '<a title="'.transWord('delete').'" id="delete" href="'.route('departments-delete', $row->id).'" class="btn btn-danger">
+                            $btn .= '<a title="'.transWord('delete').'" id="deletedep" href="'.route('departments-delete', $row->id).'" class="btn btn-danger">
                                         <i class="fas fa-trash"></i>
                                     </a>';
                         }
@@ -130,7 +130,18 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $department = Department::findOrFail($id)->delete();
+        $department = Department::findOrFail($id);
+        
+        if($department->employees()->exists()) {
+            $notification = array(
+                'message' => transWord('This Department contains employees, Cannot be deleted !!'),
+                'alert-type' => 'error'
+            );
+    
+            return redirect()->back()->with($notification);
+        }
+
+        $department->delete();
 
         $notification = array(
 			'message' => transWord('Department deleted successfully !!'),

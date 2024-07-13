@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <div class="col-8 mb-3">
+                        <div class="col-6 mb-3">
                             <div class="form-group">
                                 <label for="role_id">{{ transWord('Role') }}<span class="is-required">(*)</span></label>
                                 <select name="role_id" id="role_id" class="form-select">

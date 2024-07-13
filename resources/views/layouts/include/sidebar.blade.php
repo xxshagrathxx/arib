@@ -48,7 +48,7 @@
       {{-- ./Translation --}}
 
       {{-- Departments --}}
-        @can('update_departments')
+        @can('show_departments')
             <li class="nav-item">
                 <a class="{{ menuNoChildren('departments', true) }}" href="{{ route('departments.all') }}">
                         <i class="bi bi-collection-fill"></i>
@@ -57,6 +57,17 @@
             </li>
         @endcan
       {{-- ./Departments --}}
+
+      {{-- Employees --}}
+        @can('show_employees')
+            <li class="nav-item">
+                <a class="{{ menuNoChildren('employees', true) }}" href="{{ route('employees.all') }}">
+                        <i class="bi bi-person-square"></i>
+                        <span>{{ transWord('Employees') }}</span>
+                </a>
+            </li>
+        @endcan
+      {{-- ./Employees --}}
 
       {{-- Settings --}}
         @can('update_settings')
