@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
     {
         $user = User::create([
             'name' => 'Super Admin',
-            'password' => \Hash::make('P@$$w0rd_098'),
-            'email' => 'owner@binbug.net',
+            'password' => \Hash::make('123456'),
+            'email' => 'arib@admin.com',
             'phone' => '01234567890',
             'email_verified_at' => now(),
             'role_id' => 1, // As this is the super admin

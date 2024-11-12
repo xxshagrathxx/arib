@@ -3,4 +3,4 @@
 - Create a database
 - Make an .env file in the root and modify the configuration
 - Use "php artisan migrate:fresh --seed" command
-- Login using owner@binbug.net or 01234567890 and use the password P@$$w0rd_098
+- Login using arib@admin.com or 01234567890 and use the password 123456
